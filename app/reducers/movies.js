@@ -1,9 +1,9 @@
 
 import { combineReducers } from 'redux';
 import {
-  SELECT_SUBREDDIT, INVALIDATE_SUBREDDIT,
+  SELECT_THEATERS, INVALIDATE_THEATERS,
   REQUEST_MOVIES, RECEIVE_MOVIES
-} from '../actions';
+} from './../actions/movieActions';
 
 const initialState = {
   isFetching: false,
@@ -11,9 +11,9 @@ const initialState = {
   movies: []
 };
 
-function selectedSubreddit(state = 'reactjs', action) {
+function selectedTheaters(state = 'reactjs', action) {
   switch (action.type) {
-  case SELECT_SUBREDDIT:
+  case SELECT_THEATERS:
     return action.theaters
   default:
     return state
@@ -22,7 +22,7 @@ function selectedSubreddit(state = 'reactjs', action) {
 
 function movies(state = initialState, action = {}) {
   switch (action.type) {
-    case INVALIDATE_SUBREDDIT:
+    case INVALIDATE_THEATERS:
       return Object.assign({}, state, {
         didInvalidate: true
       })
@@ -43,9 +43,9 @@ function movies(state = initialState, action = {}) {
   }
 }
 
-function postsBySubreddit(state = { }, action) {
+function moviesByTheaters(state = { }, action) {
   switch (action.type) {
-    case INVALIDATE_SUBREDDIT:
+    case INVALIDATE_THEATERS:
     case RECEIVE_MOVIES:
     case REQUEST_MOVIES:
       return Object.assign({}, state, {
@@ -57,8 +57,8 @@ function postsBySubreddit(state = { }, action) {
 }
 
 const rootReducer = combineReducers({
-  postsBySubreddit,
-  selectedSubreddit
+  moviesByTheaters,
+  selectedTheaters
 })
 
 export default rootReducer
